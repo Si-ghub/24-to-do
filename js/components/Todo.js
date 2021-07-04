@@ -8,7 +8,9 @@ class Todo {
         this.newBorderColorDOM = null;
         this.buttonSaveDOM = null;
 
+
         this.messages = JSON.parse(localStorage.getItem('messages')) || [];
+
 
         this.init();
     }
@@ -42,9 +44,9 @@ class Todo {
     generateAddForm() {
         return `<form>
                     <label for="new_text">Message</label>
-                    <input id="new_text" type="text">
+                    <input id="new_text" type="text" value="">  
                     <label for="new_border_color">Border color</label>
-                    <input id="new_border_color" type="color">
+                    <input id="new_border_color" type="color" value="#2233"> 
                     <button id="save_button" type="submit">Save</button>
                     <button type="reset">Reset</button>
                 </form>`;
@@ -101,6 +103,7 @@ class Todo {
     }
 
     addEvents() {
+
         this.buttonSaveDOM.addEventListener('click', (e) => {
             e.preventDefault();
             const message = this.newMessageDOM.value;
@@ -111,6 +114,7 @@ class Todo {
             }
 
             this.renderTask(message, color);
+
 
             this.messages.push({
                 messageText: message,
