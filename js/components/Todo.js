@@ -46,7 +46,7 @@ class Todo {
                     <label for="new_text">Message</label>
                     <input id="new_text" type="text" value="">  
                     <label for="new_border_color">Border color</label>
-                    <input id="new_border_color" type="color" value="#2233"> 
+                    <input id="new_border_color" type="color" value="#ff1100">
                     <button id="save_button" type="submit">Save</button>
                     <button type="reset">Reset</button>
                 </form>`;
