@@ -8,6 +8,8 @@ class Todo {
         this.newBorderColorDOM = null;
         this.buttonSaveDOM = null;
 
+        this.messages = JSON.parse(localStorage.getItem('messages')) || [];
+
         this.init();
     }
 
@@ -24,6 +26,7 @@ class Todo {
         this.DOM.classList.add('todo');
 
         this.render();
+        this.renderList();
         this.addEvents();
     }
 
@@ -62,6 +65,12 @@ class Todo {
         return `<div class="list"></div>`;
     }
 
+    renderList() {
+        for (const task of this.messages) {
+            this.renderTask(task.messageText, task.borderColor);
+        }
+    }
+
     renderTask(text, borderColor = '#ccc') {
         if (typeof text !== 'string' ||
             text === '') {
@@ -97,7 +106,18 @@ class Todo {
             const message = this.newMessageDOM.value;
             const color = this.newBorderColorDOM.value;
 
+            if (message === '') {
+                return false;
+            }
+
             this.renderTask(message, color);
+
+            this.messages.push({
+                messageText: message,
+                borderColor: color
+            })
+
+            localStorage.setItem('messages', JSON.stringify(this.messages));
         })
     }
 }
