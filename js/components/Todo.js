@@ -18,7 +18,7 @@ class Todo {
 
         this.localStorageIDcount = 'todosID';
         this.localStorageTodosKey = 'todosList';
-        this.latestUsedID = JSON.parse(localStorage.getItem(this.localStorageIDcount)) || 0; //paskutinis panaudotas ID, kad refreshinus nepradetu is naujo o testu nuo paskutinio ID, jei nieko nera pradeda nuo 0
+        this.latestUsedID = JSON.parse(localStorage.getItem(this.localStorageIDcount)) || 0;
         this.messages = JSON.parse(localStorage.getItem(this.localStorageTodosKey)) || [];
 
         this.currentlyEditableTaskID = 0;
@@ -136,7 +136,7 @@ class Todo {
         this.newMessageDOM = document.getElementById('new_text');
         this.newBorderColorDOM = document.getElementById('new_border_color');
         this.buttonSaveDOM = document.getElementById('save_button');
-        // updateForm
+
         this.updateFormDOM = document.getElementById('update_task');
         this.updateMessageDOM = document.getElementById('updated_text');
         this.updateBorderColorDOM = document.getElementById('updated_border_color');
