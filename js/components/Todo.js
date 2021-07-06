@@ -18,7 +18,7 @@ class Todo {
 
         this.localStorageIDcount = 'todosID';
         this.localStorageTodosKey = 'todosList';
-        this.latestUsedID = JSON.parse(localStorage.getItem(this.localStorageIDcount)) || 0;
+        this.latestUsedID = JSON.parse(localStorage.getItem(this.localStorageIDcount)) || 0; //paskutinis panaudotas ID, kad refreshinus nepradetu is naujo o testu nuo paskutinio ID, jei nieko nera pradeda nuo 0
         this.messages = JSON.parse(localStorage.getItem(this.localStorageTodosKey)) || [];
 
         this.currentlyEditableTaskID = 0;
@@ -30,7 +30,6 @@ class Todo {
         if (!this.isValidSelector()) {
             return false;
         }
-
         this.DOM = document.getElementById(this.IDselector);
         if (!this.DOM) {
             console.error('ERROR: nerasta vieta, pagal duota selector');
@@ -53,7 +52,7 @@ class Todo {
     }
 
     generateAddForm() {
-        return `<form id="add_task">
+        return `<form id="add_task"> 
                     <label for="new_text">Message</label>
                     <input id="new_text" type="text" value="">  
                     <label for="new_border_color">Border color</label>
@@ -137,7 +136,7 @@ class Todo {
         this.newMessageDOM = document.getElementById('new_text');
         this.newBorderColorDOM = document.getElementById('new_border_color');
         this.buttonSaveDOM = document.getElementById('save_button');
-
+        // updateForm
         this.updateFormDOM = document.getElementById('update_task');
         this.updateMessageDOM = document.getElementById('updated_text');
         this.updateBorderColorDOM = document.getElementById('updated_border_color');
@@ -146,7 +145,7 @@ class Todo {
     }
 
     addEvents() {
-        // pridedamas uzrasas
+
         this.buttonSaveDOM.addEventListener('click', (e) => {
             e.preventDefault();
 
@@ -165,11 +164,11 @@ class Todo {
 
             this.renderTask(this.latestUsedID, message, color);
 
-            localStorage.setItem(this.localStorageIDcount, JSON.stringify(this.latestUsedID));
+            localStorage.setItem(this.localStorageIDcount, JSON.stringify(this.latestUsedID)); //saugosi i atminti dvi atskiros eilutes
             localStorage.setItem(this.localStorageTodosKey, JSON.stringify(this.messages));
         })
 
-        // uzraso istrinimas
+
         this.buttonCancelDOM.addEventListener('click', (e) => {
             e.preventDefault();
             this.addFormDOM.classList.remove('hide');
@@ -189,7 +188,6 @@ class Todo {
             }
             localStorage.setItem(this.localStorageTodosKey, JSON.stringify(this.messages));
 
-            // uzraso redagavimas
             const taskDOM = this.DOM.querySelector('#task_' + this.currentlyEditableTaskID);
             const taskTextDOM = taskDOM.querySelector('.text');
             taskTextDOM.innerText = message;
